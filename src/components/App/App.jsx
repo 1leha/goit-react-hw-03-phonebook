@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 
 import { Box } from 'components/Box';
-import { AppStyled } from './App.styled';
+import Section from 'components/Section';
+import PhonebookEditor from 'components/PhonebookEditor';
+
+// import { AppStyled } from './App.styled';
 
 export class App extends Component {
-  state = {};
+  state = {
+    contacts: [],
+    name: '',
+  };
 
   render() {
     return (
@@ -17,7 +23,10 @@ export class App extends Component {
         fontSize="xxl"
         color="primary"
       >
-        <AppStyled>My React Boilerplate</AppStyled>
+        <Section title="My phonebook">
+          <PhonebookEditor />
+        </Section>
+        <Section title="Contacts">Contacts</Section>
       </Box>
     );
   }
