@@ -12,6 +12,10 @@ export class App extends Component {
     name: '',
   };
 
+  onSubmit = formData => {
+    console.log('formData :>> ', formData);
+  };
+
   render() {
     return (
       <Box
@@ -20,11 +24,11 @@ export class App extends Component {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        fontSize="xxl"
+        fontSize="l"
         color="primary"
       >
         <Section title="My phonebook">
-          <PhonebookEditor />
+          <PhonebookEditor onSubmit={this.onSubmit} />
         </Section>
         <Section title="Contacts">Contacts</Section>
       </Box>

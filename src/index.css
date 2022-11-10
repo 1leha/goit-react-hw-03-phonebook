@@ -20,3 +20,8 @@ ul {
   margin: 0;
   padding: 0;
 }
+
+h2,
+label {
+  font-size: 14px;
+}
