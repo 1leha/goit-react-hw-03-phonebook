@@ -13,16 +13,16 @@ const phoneRegExp =
 
 const validationShema = yup.object().shape({
   name: yup.string().matches(nameRegExp).required(),
-  phone: yup.string().matches(phoneRegExp),
+  phone: yup.string().matches(phoneRegExp).required(),
 });
 
 const PhonebookEditor = ({ onSubmit }) => {
-  const handelSubmit = (values, actions) => {
+  const handelSubmit = (values, { resetForm }) => {
     console.log('PhonebookEditor values :>> ', values);
-    console.log('PhonebookEditor actions :>> ', actions);
+    // console.log('PhonebookEditor actions :>> ', actions);
 
     onSubmit(values);
-    actions.resetForm();
+    resetForm();
   };
 
   return (
@@ -40,10 +40,18 @@ const PhonebookEditor = ({ onSubmit }) => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         />
 
-        {/* <br />
+        <br />
 
         <label htmlFor="phone">Phone number</label>
-        <Field name="phone" type="tel" placeholder="Phone number" /> */}
+        <Field
+          name="phone"
+          type="tel"
+          placeholder="Phone number"
+          id="phone"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+        />
+
+        <br />
 
         <button type="submit">Add contact</button>
       </Form>
