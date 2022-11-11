@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 
+import { defaultContacts, message } from '../settings';
+
 import { Box } from 'components/Box';
 import Section from 'components/Section';
 import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
+import Notification from 'components/Notification';
 
 // import { AppStyled } from './App.styled';
-
-const defaultContacts = [
-  { id: 'id-1', name: 'Rosie Simpson', phone: '459-12-56' },
-  { id: 'id-2', name: 'Hermione Kline', phone: '443-89-12' },
-  { id: 'id-3', name: 'Eden Clements', phone: '645-17-79' },
-  { id: 'id-4', name: 'Annie Copeland', phone: '227-91-26' },
-];
 
 export class App extends Component {
   state = {
@@ -52,6 +48,7 @@ export class App extends Component {
 
   render() {
     const { contacts, filter } = this.state;
+    const { isEmptyBook, noMatches } = message;
 
     const filterNormalized = filter.toLowerCase();
     const filteredContacts = contacts.filter(({ name }) =>
@@ -76,9 +73,9 @@ export class App extends Component {
         </Section>
         <Section title="Contacts">
           {isPhonebookEmpty ? (
-            'The phonebook is empty...'
+            <Notification message={isEmptyBook} />
           ) : (
-            <>
+            <Box>
               <Filter
                 filterString={filter}
                 onChange={this.handleChangeFilter}
@@ -86,14 +83,14 @@ export class App extends Component {
                 noContactsFiltred={isFilteredContactsEmpty}
               />
               {isFilteredContactsEmpty ? (
-                'No matches found!'
+                <Notification message={noMatches} />
               ) : (
                 <ContactList
                   contacts={filteredContacts}
                   onDeleteContact={this.deleteContact}
                 />
               )}
-            </>
+            </Box>
           )}
         </Section>
       </Box>

@@ -1,25 +1,23 @@
 import React from 'react';
 import { HiUserAdd } from 'react-icons/hi';
 
-import { Formik, Form, Field } from 'formik';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import { nanoid } from 'nanoid';
 
-const initialValue = {
-  name: '',
-  phone: '',
-};
-
-const validationString = {
-  name: /^[a-zA-Zа-яА-Я]+(([' -][a - zA - Zа - яА - Я])?[a - zA - Zа - яА - Я]*) *$/,
-  phone:
-    /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-};
+import { initialValue, validationString, message } from '../settings';
+import Notification from 'components/Notification';
 
 const validationShema = yup.object().shape({
-  name: yup.string().matches(validationString.name).required(),
-  phone: yup.string().matches(validationString.phone).required(),
+  name: yup
+    .string()
+    .matches(validationString.name, message.wrongInput)
+    .required(message.isRequired),
+  phone: yup
+    .string()
+    .matches(validationString.phone, message.wrongInput)
+    .required(message.isRequired),
 });
 
 const PhonebookEditor = ({ onSubmit }) => {
@@ -45,7 +43,9 @@ const PhonebookEditor = ({ onSubmit }) => {
           id="name"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         />
-
+        <ErrorMessage name="name">
+          {message => <Notification message={message} />}
+        </ErrorMessage>
         <br />
 
         <label htmlFor="phone">Phone number</label>
@@ -56,6 +56,9 @@ const PhonebookEditor = ({ onSubmit }) => {
           id="phone"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         />
+        <ErrorMessage name="phone">
+          {message => <Notification message={message} />}
+        </ErrorMessage>
 
         <br />
 
