@@ -1,18 +1,22 @@
 import React from 'react';
 import { MdDelete } from 'react-icons/md';
 
+import { Box } from 'components/Box';
+
+import { ContactButtonStyled } from './Contact.styled';
+
 const Contact = ({ contactId, name, phone, getContactId }) => {
   const handelClick = () => {
     getContactId(contactId);
   };
 
   return (
-    <li>
+    <Box display="flex" alignItems="center" justifyContent="space-between">
       {name}: {phone}
-      <button type="button" onClick={handelClick}>
-        <MdDelete />
-      </button>
-    </li>
+      <ContactButtonStyled type="button" onClick={handelClick}>
+        <MdDelete size="25" />
+      </ContactButtonStyled>
+    </Box>
   );
 };
 

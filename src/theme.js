@@ -9,8 +9,8 @@ export const theme = {
 
     primary: 'black',
     secondary: 'white',
-    third: '#797979',
-    notification: '#999999',
+    third: '#f6f6f6',
+    notification: '#ed0000',
 
     titleBG: '#65472e',
     footerBG: '#65472e',
@@ -46,13 +46,14 @@ export const theme = {
   radii: {
     none: 'none',
     standart: '10px',
-    rounded: '50%',
+    rounded: '20px',
+    round: '50%',
   },
 
   shadows: {
     standart: `0px 0px 10px #11111155`,
-    buttonsUp: `inset 5px 5px 5px #00000022`,
-    buttonsDown: `inset 10px 10px 10px #00000011`,
+    onFocus: `inset -5px -5px 5px #00000022`,
+    onHover: `inset 0 0 10px #00000033`,
   },
 
   space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
@@ -60,12 +61,16 @@ export const theme = {
   sizes: {
     wholeHeight: '100vh',
   },
+  transitions: { standart: 'all 0.3s ease-in' },
 };
 
 // Моя шпаргалка
 // borders:	border, border-top, border-right, border-bottom, border-left, border-block, border-block-end, border-block-start, border-inline, border-inline-end, border-inline-start
+
 // borderStyles:	border-style, border-top-style, border-bottom-style, border-left-style, border-right-style, border-block-end-style, border-block-start-style, border-block-style, border-inline-end-style, border-inline-start-style, border-inline-style
+
 // borderWidths:	border-width, border-top-width, border-bottom-width, border-left-width, border-right-width, border-block-end-width, border-block-start-width, border-block-width, border-inline-end-width, border-inline-start-width, border-inline-width, column-rule-width
+
 // colors:	color, background, background-color, border-color, caret-color, column-rule-color, outline-color, text-decoration-color, border-top-color, border-bottom-color, border-left-color, border-right-color, border-block-color, border-block-end-color, border-block-start-color, border-inline-color, border-inline-end-color, border-inline-start-color, fill, stroke
 // fonts:	font-family
 // fontSizes:	font-size

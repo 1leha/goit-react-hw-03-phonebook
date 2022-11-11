@@ -1,26 +1,6 @@
 import styled from 'styled-components';
 
-export const LabelStyled = styled.label`
-  font-size: ${p => p.theme.fontSizes.m};
-
-  margin-bottom: 60px;
-  margin-left: ${p => p.theme.space[3]}px;
-  margin-right: ${p => p.theme.space[3]}px;
-`;
-
-export const InputStyled = styled.input`
-  width: 100%;
-  padding-top: ${p => p.theme.space[2]}px;
-  padding-bottom: ${p => p.theme.space[2]}px;
-  padding-left: ${p => p.theme.space[3]}px;
-  padding-right: ${p => p.theme.space[3]}px;
-
-  font-size: ${p => p.theme.fontSizes.m};
-
-  border-radius: ${p => p.theme.radii.rounded};
-`;
-
-export const ButtonStyled = styled.button`
+export const ContactButtonStyled = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;

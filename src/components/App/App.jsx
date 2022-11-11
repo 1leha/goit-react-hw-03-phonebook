@@ -9,7 +9,7 @@ import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
 import Notification from 'components/Notification';
 
-// import { AppStyled } from './App.styled';
+import { AppStyled, AppTitleStyled } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -28,7 +28,7 @@ export class App extends Component {
     }
 
     this.setState(({ contacts }) => ({
-      contacts: [...contacts, { id, name, phone }],
+      contacts: [{ id, name, phone }, ...contacts],
     }));
   };
 
@@ -68,31 +68,37 @@ export class App extends Component {
         fontSize="l"
         color="primary"
       >
-        <Section title="My phonebook">
-          <ContactForm onSubmit={this.onSubmit} />
-        </Section>
-        <Section title="Contacts">
-          {isPhonebookEmpty ? (
-            <Notification message={isEmptyBook} />
-          ) : (
-            <Box>
-              <Filter
-                filterString={filter}
-                onChange={this.handleChangeFilter}
-                clearFilter={this.clearFilter}
-                noContactsFiltred={isFilteredContactsEmpty}
-              />
-              {isFilteredContactsEmpty ? (
-                <Notification message={noMatches} />
-              ) : (
-                <ContactList
-                  contacts={filteredContacts}
-                  onDeleteContact={this.deleteContact}
+        <AppTitleStyled>My phonebook</AppTitleStyled>
+
+        <AppStyled>
+          <Section title="Contacts editor">
+            <ContactForm onSubmit={this.onSubmit} />
+          </Section>
+
+          <Section title="Contacts">
+            {isPhonebookEmpty ? (
+              <Notification message={isEmptyBook} />
+            ) : (
+              <>
+                <Filter
+                  filterString={filter}
+                  onChange={this.handleChangeFilter}
+                  clearFilter={this.clearFilter}
+                  noContactsFiltred={isFilteredContactsEmpty}
                 />
-              )}
-            </Box>
-          )}
-        </Section>
+
+                {isFilteredContactsEmpty ? (
+                  <Notification message={noMatches} />
+                ) : (
+                  <ContactList
+                    contacts={filteredContacts}
+                    onDeleteContact={this.deleteContact}
+                  />
+                )}
+              </>
+            )}
+          </Section>
+        </AppStyled>
       </Box>
     );
   }
