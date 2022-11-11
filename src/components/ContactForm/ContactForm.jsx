@@ -1,27 +1,32 @@
 import React from 'react';
+import { HiUserAdd } from 'react-icons/hi';
+
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import { nanoid } from 'nanoid';
 
 const initialValue = {
   name: '',
   phone: '',
 };
 
-const nameRegExp = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
-const phoneRegExp =
-  /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
+const validationString = {
+  name: /^[a-zA-Zа-яА-Я]+(([' -][a - zA - Zа - яА - Я])?[a - zA - Zа - яА - Я]*) *$/,
+  phone:
+    /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+};
 
 const validationShema = yup.object().shape({
-  name: yup.string().matches(nameRegExp).required(),
-  phone: yup.string().matches(phoneRegExp).required(),
+  name: yup.string().matches(validationString.name).required(),
+  phone: yup.string().matches(validationString.phone).required(),
 });
 
 const PhonebookEditor = ({ onSubmit }) => {
   const handelSubmit = (values, { resetForm }) => {
-    console.log('PhonebookEditor values :>> ', values);
-    // console.log('PhonebookEditor actions :>> ', actions);
+    const id = nanoid();
 
-    onSubmit(values);
+    onSubmit({ id, ...values });
+
     resetForm();
   };
 
@@ -53,7 +58,9 @@ const PhonebookEditor = ({ onSubmit }) => {
 
         <br />
 
-        <button type="submit">Add contact</button>
+        <button type="submit">
+          <HiUserAdd /> Add contact
+        </button>
       </Form>
     </Formik>
   );

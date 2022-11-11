@@ -1,6 +1,8 @@
 import React from 'react';
+import { TiDelete } from 'react-icons/ti';
 
-const Filter = ({ filterString, onChange }) => {
+const Filter = ({ filterString, onChange, clearFilter, noContactsFiltred }) => {
+  // noContactsFiltred && clearFilter();
   return (
     <>
       <label htmlFor="filter">Find contacts by name</label>
@@ -12,6 +14,9 @@ const Filter = ({ filterString, onChange }) => {
         value={filterString}
         onChange={onChange}
       />
+      <button type="button" onClick={clearFilter}>
+        <TiDelete />
+      </button>
     </>
   );
 };

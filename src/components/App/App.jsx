@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
 
 import { Box } from 'components/Box';
 import Section from 'components/Section';
 import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
+import ContactList from 'components/ContactList';
 
 // import { AppStyled } from './App.styled';
 
 const defaultContacts = [
-  { name: 'Bob Barker', phone: '1111111111' },
-  { name: 'Alf', phone: '22222' },
-  { name: 'Rik', phone: '333333333333' },
-  { name: 'Morty', phone: '4444444444' },
-  { name: 'Dan Luis', phone: '55555555555' },
-  { name: 'Alise', phone: '7683475638465834' },
+  { id: 'id-1', name: 'Rosie Simpson', phone: '459-12-56' },
+  { id: 'id-2', name: 'Hermione Kline', phone: '443-89-12' },
+  { id: 'id-3', name: 'Eden Clements', phone: '645-17-79' },
+  { id: 'id-4', name: 'Annie Copeland', phone: '227-91-26' },
 ];
 
 export class App extends Component {
@@ -23,16 +21,33 @@ export class App extends Component {
     filter: '',
   };
 
-  onSubmit = ({ name, phone }) => {
-    // console.log('formData :>> ', formData);
+  isContactExist = abonentName => {
+    return this.state.contacts.find(({ name }) => name === abonentName);
+  };
+
+  onSubmit = ({ id, name, phone }) => {
+    if (this.isContactExist(name)) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
 
     this.setState(({ contacts }) => ({
-      contacts: [...contacts, { name, phone }],
+      contacts: [...contacts, { id, name, phone }],
+    }));
+  };
+
+  deleteContact = contactId => {
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== contactId),
     }));
   };
 
   handleChangeFilter = e => {
     this.setState({ filter: e.currentTarget.value });
+  };
+
+  clearFilter = () => {
+    this.setState({ filter: '' });
   };
 
   render() {
@@ -42,7 +57,10 @@ export class App extends Component {
     const filteredContacts = contacts.filter(({ name }) =>
       name.toLowerCase().includes(filterNormalized)
     );
-    console.log('filteredContacts :>> ', filteredContacts);
+
+    const isPhonebookEmpty = contacts.length === 0;
+    const isFilteredContactsEmpty = filteredContacts.length === 0;
+
     return (
       <Box
         height="100vh"
@@ -57,14 +75,26 @@ export class App extends Component {
           <ContactForm onSubmit={this.onSubmit} />
         </Section>
         <Section title="Contacts">
-          <Filter filterString={filter} onChange={this.handleChangeFilter} />
-          <ul>
-            {filteredContacts.map(({ name, phone }) => (
-              <li key={nanoid()}>
-                {name}: {phone}
-              </li>
-            ))}
-          </ul>
+          {isPhonebookEmpty ? (
+            'The phonebook is empty...'
+          ) : (
+            <>
+              <Filter
+                filterString={filter}
+                onChange={this.handleChangeFilter}
+                clearFilter={this.clearFilter}
+                noContactsFiltred={isFilteredContactsEmpty}
+              />
+              {isFilteredContactsEmpty ? (
+                'No matches found!'
+              ) : (
+                <ContactList
+                  contacts={filteredContacts}
+                  onDeleteContact={this.deleteContact}
+                />
+              )}
+            </>
+          )}
         </Section>
       </Box>
     );
