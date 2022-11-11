@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Box } from 'components/Box';
 import Section from 'components/Section';
-import PhonebookEditor from 'components/PhonebookEditor';
+import ContactForm from 'components/ContactForm';
 
 // import { AppStyled } from './App.styled';
 
@@ -12,11 +12,17 @@ export class App extends Component {
     name: '',
   };
 
-  onSubmit = formData => {
-    console.log('formData :>> ', formData);
+  onSubmit = ({ name, phone }) => {
+    // console.log('formData :>> ', formData);
+
+    this.setState(({ contacts }) => ({
+      contacts: [...contacts, { name }],
+    }));
   };
 
   render() {
+    const { contacts } = this.state;
+
     return (
       <Box
         height="100vh"
@@ -28,9 +34,15 @@ export class App extends Component {
         color="primary"
       >
         <Section title="My phonebook">
-          <PhonebookEditor onSubmit={this.onSubmit} />
+          <ContactForm onSubmit={this.onSubmit} />
         </Section>
-        <Section title="Contacts">Contacts</Section>
+        <Section title="Contacts">
+          <ul>
+            {contacts.map(({ name }) => (
+              <li>{name}</li>
+            ))}
+          </ul>
+        </Section>
       </Box>
     );
   }

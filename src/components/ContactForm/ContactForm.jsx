@@ -12,7 +12,7 @@ const phoneRegExp =
   /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
 
 const validationShema = yup.object().shape({
-  name: yup.string().matches(nameRegExp),
+  name: yup.string().matches(nameRegExp).required(),
   phone: yup.string().matches(phoneRegExp),
 });
 
