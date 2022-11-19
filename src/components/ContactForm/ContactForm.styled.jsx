@@ -25,6 +25,8 @@ export const FieldStyled = styled(Field)`
   border: none;
   outline: none;
 
+  transition: ${p => p.theme.transitions.standart};
+
   background-color: ${p => p.theme.colors.secondary};
 
   :focus {

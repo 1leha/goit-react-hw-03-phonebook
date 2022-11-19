@@ -83,8 +83,6 @@ export class App extends Component {
     const isPhonebookEmpty = contacts.length === 0;
     const isFilteredContactsEmpty = filteredContacts.length === 0;
 
-    console.log(this.state.contacts.length === 0);
-
     return (
       <Box
         height="100vh"
@@ -108,6 +106,7 @@ export class App extends Component {
           <Section title="Contacts">
             <ClearButtonStyled
               type="button"
+              aria-label="Clear all contacts"
               disabled={this.state.contacts.length === 0}
               onClick={() => {
                 this.setState({ contacts: [] });

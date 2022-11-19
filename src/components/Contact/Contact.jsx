@@ -13,7 +13,11 @@ const Contact = ({ contactId, name, phone, getContactId }) => {
   return (
     <Box display="flex" alignItems="center" justifyContent="space-between">
       {name}: {phone}
-      <ContactButtonStyled type="button" onClick={handelClick}>
+      <ContactButtonStyled
+        type="button"
+        aria-level="Delete contact"
+        onClick={handelClick}
+      >
         <MdDelete size="25" />
       </ContactButtonStyled>
     </Box>

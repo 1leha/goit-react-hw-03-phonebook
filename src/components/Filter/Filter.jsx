@@ -24,7 +24,11 @@ const Filter = ({ filterString, onChange, clearFilter }) => {
           onChange={onChange}
         />
 
-        <ButtonStyled type="button" onClick={clearFilter}>
+        <ButtonStyled
+          type="button"
+          aria-label="Clear filter"
+          onClick={clearFilter}
+        >
           <TiDelete size="36" />
         </ButtonStyled>
       </Box>

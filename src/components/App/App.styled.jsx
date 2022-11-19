@@ -32,7 +32,8 @@ export const VersionStyled = styled.span`
   font-size: ${p => p.theme.fontSizes.s};
 
   border-radius: ${p => p.theme.radii.standart};
-  background-color: red;
+
+  background-color: ${p => p.theme.colors.notification};
   color: ${p => p.theme.colors.secondary};
 `;
 

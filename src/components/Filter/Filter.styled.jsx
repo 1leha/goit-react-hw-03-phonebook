@@ -10,14 +10,26 @@ export const LabelStyled = styled.label`
 
 export const InputStyled = styled.input`
   width: 100%;
-  padding-top: ${p => p.theme.space[2]}px;
-  padding-bottom: ${p => p.theme.space[2]}px;
-  padding-left: ${p => p.theme.space[3]}px;
-  padding-right: ${p => p.theme.space[3]}px;
+
+  padding-top: ${p => p.theme.space[3]}px;
+  padding-bottom: ${p => p.theme.space[3]}px;
+  padding-left: ${p => p.theme.space[4]}px;
+  padding-right: ${p => p.theme.space[4]}px;
 
   font-size: ${p => p.theme.fontSizes.m};
 
+  background-color: ${p => p.theme.colors.formBG};
+
   border-radius: ${p => p.theme.radii.rounded};
+
+  border: none;
+  outline: none;
+
+  transition: ${p => p.theme.transitions.standart};
+
+  :focus {
+    box-shadow: ${p => p.theme.shadows.onFocus};
+  }
 `;
 
 export const ButtonStyled = styled.button`
