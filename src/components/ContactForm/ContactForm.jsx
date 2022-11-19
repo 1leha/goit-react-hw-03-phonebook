@@ -47,7 +47,7 @@ const PhonebookEditor = ({ onSubmit }) => {
           display="flex"
           flexDirection="column"
           mt="4"
-          backgroundColor="third"
+          backgroundColor="formBG"
           borderRadius="standart"
           p="4"
         >
@@ -56,7 +56,7 @@ const PhonebookEditor = ({ onSubmit }) => {
           <Box mb="3" display="flex" flexDirection="column">
             <FieldStyled
               name="name"
-              placeholder="Name"
+              placeholder="John Smith"
               id="name"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             />
@@ -72,7 +72,7 @@ const PhonebookEditor = ({ onSubmit }) => {
             <FieldStyled
               name="phone"
               type="tel"
-              placeholder="Phone number"
+              placeholder="+00 000 0000000"
               id="phone"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             />

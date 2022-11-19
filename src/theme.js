@@ -9,15 +9,11 @@ export const theme = {
 
     primary: 'black',
     secondary: 'white',
-    third: '#f6f6f6',
+    third: '#aaaaaa',
     notification: '#ed0000',
 
     titleBG: '#65472e',
-    footerBG: '#65472e',
-
-    good: '#dbfde3',
-    neutral: '#ffffd9',
-    bad: '#ffe7e7',
+    formBG: '#eeeeee',
   },
 
   fonts: {
@@ -52,8 +48,8 @@ export const theme = {
 
   shadows: {
     standart: `0px 0px 10px #11111155`,
-    onFocus: `inset -5px -5px 5px #00000022`,
-    onHover: `inset 0 0 10px #00000033`,
+    onFocus: `inset 0px -2px 2px #00000055`,
+    onHover: `inset 0 0 5px #00000055`,
   },
 
   space: [0, 2, 4, 8, 16, 32, 64, 128, 256],

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { AiOutlineClear } from 'react-icons/ai';
 
-import { defaultContacts, message } from '../settings';
+import localeStoregeApi from '../../localeStorageApi/';
+import { message } from '../settings';
 
 import { Box } from 'components/Box';
 import Section from 'components/Section';
@@ -9,11 +11,16 @@ import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
 import Notification from 'components/Notification';
 
-import { AppStyled, AppTitleStyled } from './App.styled';
+import {
+  AppStyled,
+  AppTitleStyled,
+  ClearButtonStyled,
+  VersionStyled,
+} from './App.styled';
 
 export class App extends Component {
   state = {
-    contacts: defaultContacts,
+    contacts: [],
     filter: '',
   };
 
@@ -46,6 +53,24 @@ export class App extends Component {
     this.setState({ filter: '' });
   };
 
+  //!-------------------------------
+  //!    LocaleStorage operation
+  //!-------------------------------
+
+  componentDidMount() {
+    const savedContacts = localeStoregeApi.readContacts();
+
+    if (savedContacts) {
+      this.setState({ contacts: savedContacts });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localeStoregeApi.writeContacts(this.state.contacts);
+    }
+  }
+
   render() {
     const { contacts, filter } = this.state;
     const { isEmptyBook, noMatches } = message;
@@ -58,6 +83,8 @@ export class App extends Component {
     const isPhonebookEmpty = contacts.length === 0;
     const isFilteredContactsEmpty = filteredContacts.length === 0;
 
+    console.log(this.state.contacts.length === 0);
+
     return (
       <Box
         height="100vh"
@@ -68,7 +95,10 @@ export class App extends Component {
         fontSize="l"
         color="primary"
       >
-        <AppTitleStyled>My phonebook</AppTitleStyled>
+        <Box position="relative">
+          <AppTitleStyled>My phonebook</AppTitleStyled>
+          <VersionStyled>LocaleStorage Mode</VersionStyled>
+        </Box>
 
         <AppStyled>
           <Section title="Contacts editor">
@@ -76,6 +106,15 @@ export class App extends Component {
           </Section>
 
           <Section title="Contacts">
+            <ClearButtonStyled
+              type="button"
+              disabled={this.state.contacts.length === 0}
+              onClick={() => {
+                this.setState({ contacts: [] });
+              }}
+            >
+              <AiOutlineClear size="30" />
+            </ClearButtonStyled>
             {isPhonebookEmpty ? (
               <Notification message={isEmptyBook} />
             ) : (

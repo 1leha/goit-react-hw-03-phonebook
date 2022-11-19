@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const SectionStyled = styled.section`
   padding: ${p => p.theme.space[4]}px;
+  position: relative;
 `;
 
 export const SectionTitleStyled = styled.h2`
