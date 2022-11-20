@@ -15,7 +15,7 @@ const Contact = ({ contactId, name, phone, getContactId }) => {
       {name}: {phone}
       <ContactButtonStyled
         type="button"
-        aria-level="Delete contact"
+        aria-label="Delete contact"
         onClick={handelClick}
       >
         <MdDelete size="25" />
